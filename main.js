@@ -75,29 +75,32 @@ document.querySelector("#blow-up button").addEventListener('click',function(){
 
 document.querySelector("#remove button").addEventListener('click',function(){
   // TASK #5
-  var act = document.querySelectorAll('#user-list .active');
-  console.log( ...act);
-  var actarr = [ ...act];
-  console.log(actarr);
 
-  var use = document.querySelectorAll('#user-list');
-  console.log( ...use);
-  var usearr = [ ... use];
-  console.log(usearr);
-  actarr.forEach( function(el, i){
-
-    console.log(el.textContent);
-    var narr = el.textContent
-
-    if(narr === 'active user'){
-      var list = narr;
-      //console.log(list);
-    }
-    //list = list;
-    console.log(list);
-    use.textContent = `<li>${list}</li>`;
+  //var clas = document.getElementById('user-list').classList;          //Esto es para validar las clases que contiene
+  //console.log(clas);                                                  //Y las despliego en consola para poder verlas
+  var list = document.getElementById('user-list');                      //Aquí selecciono el id que contiene las calses que intento eliminar
+  //console.log(list);                                                    //Y las despliego en consola para poder verlas
+  // agregar clase
+  //list.classList.add('ejemplo');
+  //eliminar clase
+  list.classList.remove('inactive');                                    //intenté eliminar la clase, pensando que eliminaría todo (iluso)
+  //console.log(list);                                                    //Una de 50 frustraciones
+  var iact = document.querySelectorAll('#user-list .inactive');         //Me doy cuenta que tengo que hacer una selección m;as especifica
+  //console.log( ...iact);                                                //La despliego en consola
+  var iactarr = [ ...iact];                                             //la meto en una array simulado
+  //console.log(iactarr);                                                 //Y las despliego en consola para poder verlas
+  iactarr.forEach( function(el, i){                                     //genero la iteración para poder eliminar los elementos
+    //console.log(el.textContent);                                        //Despliego en consola para poder verificar
+    el.textContent = '';                                                //Elimino el contenido(sólo el texto)
+    el.classList.remove('inactive');                                    //Elimino la clase y me doy cuenta que hay que eliminar también la etiqueta de listado
+    pad = el.parentNode;                                                //Genero el elemento a eliminar
+		pad.removeChild(el);                                                //Elimino el elemento (la etiqueta)
+    //console.log(el.textContent);                                        //Y las despliego en consola para poder verificarlo
+    //console.log(el);                                                    //Y las despliego en consola para poder verificar los elementos
   })
-  //use.innerHTML = `<li>${list}</li>`;
+  //console.log(iactarr);                                                 //Verifico sólo por curiosidad
+  //console.log(iact);                                                    //Verifico sólo por curiosidad
+
 })
 
 
@@ -106,23 +109,56 @@ document.querySelector("#reverse-squares button").addEventListener('click',funct
   var cua = document.querySelectorAll('#reverse-squares .answer-box');
   console.log( ...cua);
   var cuaarr = [ ...cua];
-  var lis = '';
+  var narr = '';
+  var lis = [ ];
+  var lif = '';
 
-  cuaarr.forEach( function(el, i){
+  cuaarr.forEach( function arr(el, i, arr){
     console.log(el.textContent);
-    lis = el.textContent;
-    var rev = el.length - i;
-    var narr = `<span>${lis[rev]}</span>`;
-    console.log(el.length);
-    console.log(lis);
-    el.innerHTML += `<span>${lis[rev]}</span>`;
+    narr += el.textContent;
+
+    lis.push(el.textContent);
+
+    //el.innerHTML += `<span>${lis[rev]}</span>`;
   })
-  //cua.innerHTML = lis;
+  console.log(narr);
+  console.log(lis);
+  console.log(typeof(lis));
+  for(var i = 0; i < narr.length; i++){
+    console.log(narr[i]);
+    var rev = narr.length - 1 - i;
+    lif += narr[rev];
+    cua.innerHTML = `<span>${narr[rev]}</span>`;
+  }
+  console.log(lif);
+  cua.innerHTML = lif;
 
 })
 
 document.querySelector("#pig-latin button").addEventListener('click',function(){
   // TASK #7
+  var lis = document.querySelectorAll('#tasks');
+  console.log( ...lis);
+  var arrl = [ ...lis];
+  console.log(arrl);
+  var palrev = '';
+  var narr = [ ];
+  arrl.forEach( function(el, i){
+    console.log(el.textContent);
+    var pal = el.textContent;
+    for(var i = 0; i < pal.length; i++){
+    //pal.forEach(function(el, i){
+      console.log(pal);
+      var rev = pal.length - 1 - i;
+      palrev = palrev + pal[rev];
+
+    }
+    narr.push(palrev);
+    console.log(palrev);
+
+    el.innerHTML = `<li>${palrev}</li>`;
+  })
+  //lis.innerHTML = `<li>${narr}</li>`;
 })
 
 document.querySelector("#cycle-image button").addEventListener('click',function(){
