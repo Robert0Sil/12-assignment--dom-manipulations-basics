@@ -137,30 +137,56 @@ document.querySelector("#reverse-squares button").addEventListener('click',funct
 
 document.querySelector("#pig-latin button").addEventListener('click',function(){
   // TASK #7
-  var lis = document.querySelectorAll('#tasks');
-  console.log( ...lis);
+  var lis = document.querySelectorAll('#tasks li');
+  //console.log( ...lis);
   var arrl = [ ...lis];
-  console.log(arrl);
-  var palrev = '';
+  //console.log(arrl);
+
   var narr = [ ];
   arrl.forEach( function(el, i){
-    console.log(el.textContent);
-    var pal = el.textContent;
+    //console.log(el.textContent);
+    var pal = el.textContent
+    var palrev = '';
     for(var i = 0; i < pal.length; i++){
     //pal.forEach(function(el, i){
-      console.log(pal);
+      //console.log(pal);
       var rev = pal.length - 1 - i;
       palrev = palrev + pal[rev];
-
+      el.innerHTML = `<li>${palrev}</li>`;
     }
-    narr.push(palrev);
-    console.log(palrev);
 
-    el.innerHTML = `<li>${palrev}</li>`;
+    //console.log(palrev);
   })
-  //lis.innerHTML = `<li>${narr}</li>`;
+
 })
+
 
 document.querySelector("#cycle-image button").addEventListener('click',function(){
    //TASK #8
+var ima = document.querySelector('#city-img');
+//console.log(ima);
+//console.log(typeof(ima));
+for(var nstr in ima){
+  //console.log('Propiedad = ', nstr);
+  //console.log('Valor = ', ima[nstr]);
+
+  if(nstr === 'outerHTML'){
+    //console.log(ima[nstr].length);
+    //console.log(ima[nstr].indexOf('1'));
+    var num = ima[nstr].slice(66, 68);
+    //console.log(num);
+    //console.log(typeof(num));
+    var con = parseInt(num);
+    //console.log(typeof(con));
+    var cont = con + 1;
+    if(cont > 10){
+      //cont = 0;
+      ima[nstr] = '<img id="city-img" class="exercise-item" src="./images/city-photo-1.jpg">';
+    }else{
+      con = con + 1;
+      ima[nstr] = '<img id="city-img" class="exercise-item" src="./images/city-photo-' + con + '.jpg">';
+    }
+  }
+}
+
 })
